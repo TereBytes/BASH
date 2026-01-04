@@ -1,0 +1,196 @@
+Comandos Basicos de Linux 
+
+Muestro un breve ejemplo de cada uno de ellos.
+
+uname 
+Ejemplo:
+uname -a
+Muestra información del sistema y del kernel: tipo de Linux, versión y detalles básicos.
+
+hostnamectl 
+Ejemplo:
+hostnamectl status
+Muestra el nombre del equipo y algunos datos del sistema (útil para identificar la máquina).
+
+whoami
+Ejemplo:
+whoami
+Devuelve el usuario con el que estás conectado en este momento.
+
+id
+Ejemplo:
+id
+Muestra tu UID, GID y los grupos a los que perteneces.
+
+uptime
+Ejemplo:
+uptime
+Indica cuánto tiempo lleva encendido el equipo y la carga promedio del sistema.
+
+top
+Ejemplo:
+top
+Monitor en tiempo real de procesos y uso de CPU/memoria.
+
+ps aux 
+Ejemplo:
+ps aux --sort=-%cpu
+Lista procesos; muestra primero los que más CPU consumen.
+
+free 
+Ejemplo:
+free -h
+Muestra memoria usada y libre en formato legible (MB/GB).
+
+df 
+Ejemplo:
+df -h
+Muestra el uso de espacio en disco por sistema de ficheros en formato legible.
+
+du -sh /ruta
+Ejemplo:
+du -sh /var/log
+Resume cuánto ocupa una carpeta (tamaño total legible).
+
+lsblk -f
+Ejemplo:
+lsblk -f
+Lista discos y particiones mostrando puntos de montaje y tipo de sistema de ficheros.
+
+mount | grep '^/dev'
+Ejemplo:
+mount | grep '^/dev'
+Muestra sistemas de ficheros montados que provienen de dispositivos físicos.
+
+journalctl -u nombre_servicio --since "1 hour ago"
+Ejemplo:
+sudo journalctl -u sshd --since "1 hour ago"
+Muestra logs recientes de un servicio gestionado por systemd.
+
+dmesg | tail -n 50
+Ejemplo:
+dmesg | tail -n 50
+Muestra mensajes del kernel (hardware/arranque); aquí se ven los últimos 50.
+
+sudo systemctl status nombre_servicio
+Ejemplo:
+sudo systemctl status nginx
+Consulta si un servicio está activo, fallando o deshabilitado.
+
+ss -tuln
+Ejemplo:
+ss -tuln
+Lista sockets/puertos abiertos y qué servicios los están escuchando (TCP/UDP).
+
+ip addr show eth0
+Ejemplo:
+ip addr show eth0
+Muestra las direcciones IP y el estado de la interfaz eth0.
+
+ip route show
+Ejemplo:
+ip route show
+Muestra la tabla de ruteo: por dónde salen los paquetes hacia otras redes.
+
+ping 
+Ejemplo:
+ping -c 4 8.8.8.8
+Comprueba si otra máquina responde y mide la latencia (4 paquetes en este caso).
+
+traceroute
+Ejemplo:
+traceroute -n 8.8.8.8
+Muestra los saltos que siguen los paquetes hasta llegar a un destino (cada salto es un router).
+
+sudo lsof 
+Ejemplo:
+sudo lsof -i :80
+Lista procesos que están usando el puerto 80 (útil para identificar servidores web).
+
+find 
+Ejemplo:
+find /var/log -type f -name ".log" -mtime -7
+Busca archivos .log modificados en los últimos 7 días dentro de una ruta.
+
+locate nombre_fichero
+Ejemplo:
+locate sshd_config
+Busca rápidamente un fichero usando la base de datos indexada del sistema (actualiza la DB con updatedb si falta).
+
+which 
+Ejemplo:
+which python3
+Muestra la ruta del ejecutable que se va a usar para ese nombre en $PATH.
+
+whereis 
+
+Ejemplo:
+whereis ssh
+Localiza binario, posibles fuentes y manuales relacionados con un comando.
+
+file 
+Ejemplo:
+file /bin/ls
+Detecta el tipo de un fichero (binario, script, texto, etc.).
+
+strings 
+Ejemplo:
+strings /usr/bin/ssh | head
+Extrae cadenas legibles de un binario; las primeras líneas pueden dar pistas rápidas.
+
+grep 
+Ejemplo:
+grep -i "error" /var/log/syslog
+Busca líneas que contengan "error" en un log, sin importar mayúsculas/minúsculas.
+
+egrep 
+Ejemplo:
+egrep "error|fail|panic" /var/log/syslog
+Busca varias palabras clave a la vez usando expresiones regulares extendidas.
+
+ps 
+Ejemplo:
+ps aux | awk '{print $1, $2, $3}'
+Usa awk para mostrar columnas concretas de la salida de ps: usuario, PID y %CPU.
+
+sed -n '1,10p' /var/log/syslog
+Ejemplo:
+sed -n '1,10p' /var/log/syslog
+Muestra líneas específicas de un fichero (aquí, de la 1 a la 10) sin editarlo.
+
+cut 
+Ejemplo:
+cut -d: -f1 /etc/passwd
+Extrae el primer campo de cada línea usando ':' como separador (lista de usuarios).
+
+cat 
+Ejemplo:
+cat /etc/passwd | cut -d: -f1 | sort
+Ejemplo de tuberías: lista usuarios extraídos y los ordena alfabéticamente.
+
+sort
+Ejemplo:
+sort file.txt | uniq -c
+Ordena las líneas y cuenta las repeticiones consecutivas (útil para ver frecuencias).
+
+find 
+Ejemplo:
+find /tmp -type f -name '.tmp' -print0 | xargs -0 rm -f
+Elimina archivos .tmp encontrados de forma segura, manejando nombres con espacios o caracteres raros.
+
+head 
+Ejemplo:
+head -n 20 /var/log/syslog
+Muestra las primeras 20 líneas de un fichero (útil para inspección rápida).
+
+tail 
+Ejemplo:
+tail -n 200 -f /var/log/nginx/access.log
+Muestra las últimas 200 líneas y sigue mostrando nuevas entradas en tiempo real (útil para logs activos).
+
+sudo -l
+Ejemplo:
+sudo -l
+Muestra qué comandos puedes ejecutar con sudo; ayuda a entender tus permisos en el sistema.
+
+
